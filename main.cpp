@@ -74,11 +74,11 @@ void getPreview( int previewAddr, previewType *preview, FILE* fp ) {
 }
 
 void writePreview( previewType *preview, FILE* fp) {
-    fwrite(&preview->resolutionX, sizeof(previewType::resolutionX),1,fp);
-    fwrite(&preview->resolutionY, sizeof(previewType::resolutionY),1,fp);
-    fwrite(&preview->imageAddress, sizeof(previewType::imageAddress),1,fp);
-    fwrite(&preview->dataLength, sizeof(previewType::dataLength),1,fp);
-    fwrite(&preview->padding, sizeof(previewType::padding),1,fp);
+    fwrite(&preview->resolutionX, sizeof(preview->resolutionX),1,fp);
+    fwrite(&preview->resolutionY, sizeof(preview->resolutionY),1,fp);
+    fwrite(&preview->imageAddress, sizeof(preview->imageAddress),1,fp);
+    fwrite(&preview->dataLength, sizeof(preview->dataLength),1,fp);
+    fwrite(&preview->padding, sizeof(preview->padding),1,fp);
     fwrite(preview->imageData, static_cast<unsigned long>(preview->dataLength), 1, fp);
 }
 
@@ -275,19 +275,19 @@ int main(int argc, char* argv[]) {
 
     int nextFp = sizeof(headerType);
     header.preview0Addr = nextFp;
-    nextFp += sizeof(previewType::padding) +
-            sizeof(previewType::dataLength) +
-            sizeof(previewType::resolutionX) +
-            sizeof(previewType::resolutionY) +
-            sizeof(previewType::imageAddress);
+    nextFp += sizeof(preview1.padding) +
+            sizeof(preview1.dataLength) +
+            sizeof(preview1.resolutionX) +
+            sizeof(preview1.resolutionY) +
+            sizeof(preview1.imageAddress);
     preview1.imageAddress = nextFp;
     nextFp += static_cast<unsigned long>(preview1.dataLength);
     header.preview1Addr = nextFp;
-    nextFp += sizeof(previewType::padding) +
-            sizeof(previewType::dataLength) +
-            sizeof(previewType::resolutionX) +
-            sizeof(previewType::resolutionY) +
-            sizeof(previewType::imageAddress);
+    nextFp += sizeof(preview1.padding) +
+            sizeof(preview1.dataLength) +
+            sizeof(preview1.resolutionX) +
+            sizeof(preview1.resolutionY) +
+            sizeof(preview1.imageAddress);
     preview2.imageAddress = nextFp;
     nextFp += static_cast<unsigned long>(preview2.dataLength);
     header.layerDefsAddr = nextFp;
